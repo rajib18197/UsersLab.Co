@@ -21,3 +21,16 @@ export async function getUsers({ searchTerm, page }) {
     throw err;
   }
 }
+
+export async function getUser({ id }) {
+  try {
+    const response = await fetch(`${API_URL}/users/${id}`);
+
+    if (!response.ok) throw new Error("Could not load the users Data!");
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw err;
+  }
+}

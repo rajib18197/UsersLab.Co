@@ -14,7 +14,7 @@ export default function Users() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-16 p-8">
       <div className="flex gap-2 justify-between">
         <Heading as="h1">Users List</Heading>
         <UsersListOperations>

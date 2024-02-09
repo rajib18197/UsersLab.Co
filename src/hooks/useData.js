@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useData({ searchTerm, page, service }) {
-  const [data, setData] = useState([]);
+export function useData({ searchTerm, page, service, id }) {
+  const [data, setData] = useState(id ? {} : []);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState(null);
@@ -22,9 +22,18 @@ export function useData({ searchTerm, page, service }) {
           setIsError(false);
           setError(null);
 
-          const results = await ref.current({ searchTerm, page });
+          const apiService = id
+            ? ref.current({ id })
+            : ref.current({ searchTerm, page });
+          const results = await apiService;
           console.log(results);
+
           if (!ignore) {
+            if (id) {
+              setData(results);
+              return;
+            }
+
             if (searchTerm.length > 0 && page === 1) {
               setData(results.users);
             } else {

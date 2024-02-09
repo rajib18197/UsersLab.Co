@@ -1,3 +1,9 @@
+import UserDetails from "../features/users/UserDetails";
+
 export default function User() {
-  return <div>User Page</div>;
+  return (
+    <div>
+      <UserDetails />
+    </div>
+  );
 }

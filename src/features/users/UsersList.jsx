@@ -44,7 +44,7 @@ export default function UsersList({
   console.log(users.length);
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-16">
       {users?.map((user, i) =>
         users?.length === i + 1 ? (
           <UserCard
