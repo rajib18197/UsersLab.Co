@@ -2,11 +2,21 @@ import { useState } from "react";
 import SearchUsers from "../features/users/SearchUsers";
 import UsersList from "../features/users/UsersList";
 import UsersListOperations from "../features/users/UsersListOperations";
-import Heading from "../ui/Heading";
+import Modal from "../ui/Modal";
+import Button from "../ui/Button";
+import AddNewUser from "../features/users/AddNewUser";
+import { addUser } from "../services/apiUsers";
 
 export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [newUserData, setNewUserData] = useState(null);
+
+  async function handleNewUserClick(newUser) {
+    const results = await addUser(newUser);
+    console.log(results);
+    setNewUserData(results);
+  }
 
   function handleSearchTermChange(e) {
     setSearchTerm(e.target.value);
@@ -16,7 +26,24 @@ export default function Users() {
   return (
     <div className="flex flex-col gap-16 p-8">
       <div className="flex gap-2 justify-between">
-        <Heading as="h1">Users List</Heading>
+        <Modal>
+          <Modal.Open opens="add-new-user">
+            {(handler) => (
+              <Button type="primary" onClick={handler}>
+                Add New User
+              </Button>
+            )}
+          </Modal.Open>
+          <Modal.Window windowName="add-new-user">
+            {({ onCloseModal }) => (
+              <AddNewUser
+                onAddNewUser={handleNewUserClick}
+                onCloseModal={onCloseModal}
+              />
+            )}
+          </Modal.Window>
+        </Modal>
+
         <UsersListOperations>
           <SearchUsers
             searchTerm={searchTerm}
@@ -28,6 +55,7 @@ export default function Users() {
         searchTerm={searchTerm}
         currentPage={currentPage}
         onCurrentPageChange={setCurrentPage}
+        newUserData={newUserData}
       />
     </div>
   );

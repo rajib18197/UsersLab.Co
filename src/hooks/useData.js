@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useData({ searchTerm, page, service, id }) {
+export function useData({ searchTerm, page, service, id, newUserData }) {
   const [data, setData] = useState(id ? {} : []);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -38,9 +38,13 @@ export function useData({ searchTerm, page, service, id }) {
               setData(results.users);
             } else {
               if (searchTerm.length === 0 && page === 1) {
-                setData(results.users);
+                let data = [];
+                if (newUserData) data = [{ ...newUserData }];
+                setData([...data, ...results.users]);
               } else {
-                setData((data) => [...data, ...results.users]);
+                let data = [];
+                if (newUserData) data = [{ ...newUserData }];
+                setData((prevData) => [...data, ...prevData, ...results.users]);
               }
             }
 
@@ -59,7 +63,7 @@ export function useData({ searchTerm, page, service, id }) {
         ignore = true;
       };
     },
-    [searchTerm, page]
+    [searchTerm, page, newUserData]
   );
 
   return { data, isLoading, isError, error, hasNextPage };

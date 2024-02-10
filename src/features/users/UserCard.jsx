@@ -18,15 +18,17 @@ export default forwardRef(function UserCard({ user }, ref) {
   const navigate = useNavigate();
 
   function handleClick() {
+    if (!user.age) return;
+
     navigate(`/users/${id}`);
   }
 
   return (
     <div
-      className="bg-[#101d37] text-stone-50 p-8 pb-16 w-[365px] rounded flex flex-col gap-6"
+      className="bg-[hsl(0deg, 0%, 100%)] shaodow-cs text-stone-800 p-8 pb-16 w-[365px] rounded flex flex-col gap-6"
       ref={ref}
     >
-      <div className="bg-rose-100 p-2 flex items-center justify-center w-max">
+      <div className="bg-slate-800 p-2 flex items-center justify-center w-max">
         <img
           src={avatar}
           alt={`Avatar of ${firstName} ${lastName}`}
@@ -35,7 +37,7 @@ export default forwardRef(function UserCard({ user }, ref) {
       </div>
 
       <div
-        className="bg-stone-50 text-slate-800 p-4 w-[80%]"
+        className="bg-slate-800 text-slate-50 p-4 w-[85%] rounded cursor-pointer"
         onClick={handleClick}
       >
         <h3 className="uppercase text-xl">{firstName}</h3>

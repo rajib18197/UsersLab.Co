@@ -9,7 +9,7 @@ import {
   isFieldTouched,
 } from "../../utils/helpers";
 
-export default function AddNewUser({ onCloseModal }) {
+export default function AddNewUser({ onAddNewUser, onCloseModal }) {
   const [formState, dispatch] = useReducer(formReducer, {
     firstName: {
       value: "",
@@ -110,16 +110,19 @@ export default function AddNewUser({ onCloseModal }) {
 
     // 3) If everything is fine then create a new Task and dispatch either EDIT_TASK or ADD_NEW_TASK based on the mode
 
+    const [street, city] = formState.address.value.split(",");
+
     const newUser = {
-      id: crypto.randomUUID(),
+      userIdCustom: crypto.randomUUID(),
       firstName: formState.firstName.value,
       lastName: formState.lastName.value,
       email: formState.email.value,
-      address: formState.address.value,
-      companyName: formState.companyName.value,
+      address: { address: street, city },
+      company: { name: formState.companyName.value },
     };
 
     console.log(newUser);
+    onAddNewUser(newUser);
     // 4) Finally, Close the modal window after the task has successfully created or edited
     onCloseModal();
   }

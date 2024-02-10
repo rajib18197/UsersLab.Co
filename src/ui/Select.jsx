@@ -5,7 +5,13 @@ const Select = forwardRef(function Select(
   ref
 ) {
   return (
-    <select value={value} ref={ref} onChange={onSelect} {...props}>
+    <select
+      className="border-2 border-slate-800 p-1"
+      value={value}
+      ref={ref}
+      onChange={onSelect}
+      {...props}
+    >
       <option value="">Select a Value</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>

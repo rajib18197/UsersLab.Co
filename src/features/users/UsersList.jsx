@@ -9,6 +9,7 @@ export default function UsersList({
   searchTerm,
   currentPage,
   onCurrentPageChange,
+  newUserData,
 }) {
   const ref = useRef();
   const [searchParams] = useSearchParams();
@@ -19,7 +20,12 @@ export default function UsersList({
     isError,
     error,
     hasNextPage,
-  } = useData({ searchTerm, page: currentPage, service: getUsers });
+  } = useData({
+    searchTerm,
+    page: currentPage,
+    service: getUsers,
+    newUserData: newUserData,
+  });
 
   console.log(hasNextPage);
 
