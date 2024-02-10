@@ -1,10 +1,12 @@
-import { useCallback, useRef, useState } from "react";
-import { useData } from "../../hooks/useData";
-import { getUsers } from "../../services/apiUsers";
-import UserCard from "./UserCard";
-import { sort } from "../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
+
+import { useUsersData } from "../../hooks/useUsersData";
 import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
+
+import { getUsers } from "../../services/apiUsers";
+import { sort } from "../../utils/helpers";
+
+import UserCard from "./UserCard";
 import Loader from "../../ui/Loader";
 import Error from "../../ui/Error";
 
@@ -22,7 +24,7 @@ export default function UsersList({
     isError,
     error,
     hasNextPage,
-  } = useData({
+  } = useUsersData({
     searchTerm,
     page: currentPage,
     service: getUsers,
@@ -31,6 +33,7 @@ export default function UsersList({
 
   console.log(hasNextPage);
 
+  // For Infinite Scroll
   const { refCallback } = useInfiniteScroll({
     hasNextPage,
     callback: onCurrentPageChange,
@@ -38,7 +41,7 @@ export default function UsersList({
 
   if (isError) return <Error message={error.message} />;
 
-  // 1) Sorting
+  // Sorting
   let sortedUsers = users;
   let sortBy = searchParams.get("sortBy");
 
@@ -56,14 +59,14 @@ export default function UsersList({
       {sortedUsers?.map((user, i) =>
         sortedUsers?.length === i + 1 ? (
           <UserCard
-            key={user.id}
+            key={user.email}
             namestr={users.length}
             str={i + 1}
             user={user}
             ref={refCallback}
           />
         ) : (
-          <UserCard key={user.id} user={user} />
+          <UserCard key={user.email} user={user} />
         )
       )}
 

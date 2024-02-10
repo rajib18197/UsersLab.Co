@@ -16,7 +16,7 @@ import { TIMEOUT_MILLISECONDS } from "../utils/constants";
 export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [newUserData, setNewUserData] = useState(null);
+  const [newUserData, setNewUserData] = useState([]);
 
   const { doSearch } = useDebounce(
     handleSearchTermChange,
@@ -26,7 +26,7 @@ export default function Users() {
   async function handleNewUserClick(newUser) {
     const results = await addUser(newUser);
     console.log(results);
-    setNewUserData(results);
+    setNewUserData((users) => [...users, results]);
   }
 
   function handleSearchTermChange(value) {

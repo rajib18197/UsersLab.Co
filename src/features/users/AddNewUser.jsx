@@ -1,13 +1,11 @@
+import { useReducer } from "react";
+import { formReducer } from "./formReducer";
+
 import Button from "../../ui/Button";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import { useReducer } from "react";
-import { formReducer } from "./formReducer";
-import {
-  hasErrorMessage,
-  isFieldEmpty,
-  isFieldTouched,
-} from "../../utils/helpers";
+
+import { hasErrorMessage, isFieldEmpty } from "../../utils/helpers";
 
 export default function AddNewUser({ onAddNewUser, onCloseModal }) {
   const [formState, dispatch] = useReducer(formReducer, {
@@ -40,6 +38,12 @@ export default function AddNewUser({ onAddNewUser, onCloseModal }) {
       error: "",
       isTouched: false,
     },
+
+    avatar: {
+      value: "",
+      error: "",
+      isTouched: false,
+    },
   });
 
   function handleChange(e) {
@@ -55,22 +59,13 @@ export default function AddNewUser({ onAddNewUser, onCloseModal }) {
       payload: { inputField: e.target.name },
     });
 
-    // 3) If the currently typing input field's name is [tags] then set action object's payload property to diferent value as it would be an array which means we need to modify the [e.target.value].
-    if (e.target.name === "tags") {
-      dispatch({
-        type: "CHANGE_INPUT",
-        payload: {
-          inputField: e.target.name,
-          value: e.target.value.split(","),
-        },
-      });
-      return;
-    }
-
-    // 4) For other input fields set the payload to as it is as we don't need to modify [e.target.value];
+    // 3) For other input fields set the payload to as it is as we don't need to modify [e.target.value];
     dispatch({
       type: "CHANGE_INPUT",
-      payload: { inputField: e.target.name, value: e.target.value },
+      payload: {
+        inputField: e.target.name,
+        value: e.target.value,
+      },
     });
   }
 
@@ -108,7 +103,7 @@ export default function AddNewUser({ onAddNewUser, onCloseModal }) {
       return;
     }
 
-    // 3) If everything is fine then create a new Task and dispatch either EDIT_TASK or ADD_NEW_TASK based on the mode
+    // 3) If everything is fine then create a new User
 
     const [street, city] = formState.address.value.split(",");
 
@@ -119,15 +114,19 @@ export default function AddNewUser({ onAddNewUser, onCloseModal }) {
       email: formState.email.value,
       address: { address: street, city },
       company: { name: formState.companyName.value },
+      image: avatar.value,
     };
 
     console.log(newUser);
+
     onAddNewUser(newUser);
-    // 4) Finally, Close the modal window after the task has successfully created or edited
+
+    // 4) Finally, Close the modal window after the user has successfully created
     onCloseModal();
   }
 
-  const { firstName, lastName, email, address, companyName } = formState;
+  const { firstName, lastName, email, address, companyName, avatar } =
+    formState;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
@@ -186,6 +185,27 @@ export default function AddNewUser({ onAddNewUser, onCloseModal }) {
           onChange={handleChange}
           onBlur={handleBlur}
         />
+      </FormRow>
+
+      <FormRow label="Avatar" error={avatar?.error}>
+        <Input
+          name="avatar"
+          type="text"
+          id="avatar"
+          value={avatar.value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {/* <input
+          type="file"
+          name="avatar"
+          id="avatar"
+          onChange={handleChange}
+          className="input text-stone-800 block w-full text-sm border border-gray-300 cursor-pointer  focus:outline-none file:mr-5 file:py-1 file:px-3 file:bg-blue-600 file:border-none
+          file:text-[16px] file:font-medium
+          file:text-stone-100 file:rounded
+          hover:file:cursor-pointer hover:file:bg-blue-800"
+        /> */}
       </FormRow>
 
       <div className="flex gap-2 justify-end items-center">

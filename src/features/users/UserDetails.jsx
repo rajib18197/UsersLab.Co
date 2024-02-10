@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useData } from "../../hooks/useData";
+import { useUsersData } from "../../hooks/useUsersData";
 import { getUser } from "../../services/apiUsers";
 import Heading from "../../ui/Heading";
 import Button from "../../ui/Button";
@@ -11,7 +11,7 @@ export default function UserDetails() {
     isLoading,
     isError,
     error,
-  } = useData({ id, service: getUser });
+  } = useUsersData({ id, service: getUser });
 
   if (isLoading) return <h2>Loading</h2>;
 
