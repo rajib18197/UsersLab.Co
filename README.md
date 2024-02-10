@@ -26,4 +26,4 @@
 - striving for reusable component whenever need arises
 - Fully Responsive Design
 
-Project Link: [users-lab-co.vercel.app](https://users-lab-co.vercel.app)
+Project Link: https://users-lab-co.vercel.app
