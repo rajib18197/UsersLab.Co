@@ -1,4 +1,4 @@
-const API_URL = "https://dummyjson.com";
+import { API_URL } from "../utils/constants";
 
 export async function getUsers({ searchTerm, page }) {
   try {

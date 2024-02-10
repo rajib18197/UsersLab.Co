@@ -1,19 +1,27 @@
 import { useState } from "react";
+
+import AddNewUser from "../features/users/AddNewUser";
 import SearchUsers from "../features/users/SearchUsers";
 import UsersList from "../features/users/UsersList";
 import UsersListOperations from "../features/users/UsersListOperations";
+
 import Modal from "../ui/Modal";
 import Button from "../ui/Button";
-import AddNewUser from "../features/users/AddNewUser";
+
 import { addUser } from "../services/apiUsers";
 import { useDebounce } from "../hooks/useDebounce";
+
+import { TIMEOUT_MILLISECONDS } from "../utils/constants";
 
 export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [newUserData, setNewUserData] = useState(null);
 
-  const { doSearch } = useDebounce(handleSearchTermChange, 1000);
+  const { doSearch } = useDebounce(
+    handleSearchTermChange,
+    TIMEOUT_MILLISECONDS
+  );
 
   async function handleNewUserClick(newUser) {
     const results = await addUser(newUser);

@@ -4,6 +4,9 @@ import { getUsers } from "../../services/apiUsers";
 import UserCard from "./UserCard";
 import { sort } from "../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
+import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
+import Loader from "../../ui/Loader";
+import Error from "../../ui/Error";
 
 export default function UsersList({
   searchTerm,
@@ -11,7 +14,6 @@ export default function UsersList({
   onCurrentPageChange,
   newUserData,
 }) {
-  const ref = useRef();
   const [searchParams] = useSearchParams();
 
   const {
@@ -29,29 +31,12 @@ export default function UsersList({
 
   console.log(hasNextPage);
 
-  let intObserver = useRef();
+  const { refCallback } = useInfiniteScroll({
+    hasNextPage,
+    callback: onCurrentPageChange,
+  });
 
-  const callback = useCallback(
-    function (node) {
-      console.log(node);
-      if (intObserver.current) intObserver.current.disconnect();
-
-      if (node) {
-        intObserver.current = new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting) {
-            if (hasNextPage) {
-              onCurrentPageChange((page) => page + 1);
-            }
-          }
-        });
-        intObserver.current.observe(node);
-      }
-    },
-    [hasNextPage]
-  );
-
-  if (isError) return <h2>{error.message}</h2>;
-  console.log(users.length);
+  if (isError) return <Error message={error.message} />;
 
   // 1) Sorting
   let sortedUsers = users;
@@ -75,14 +60,14 @@ export default function UsersList({
             namestr={users.length}
             str={i + 1}
             user={user}
-            ref={callback}
+            ref={refCallback}
           />
         ) : (
           <UserCard key={user.id} user={user} />
         )
       )}
 
-      {isLoading && <h2>Loading</h2>}
+      {isLoading && <Loader />}
     </div>
   );
 }

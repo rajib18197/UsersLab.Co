@@ -48,7 +48,7 @@ export function useData({ searchTerm, page, service, id, newUserData }) {
               }
             }
 
-            setHasNextPage(data.length < results.total);
+            setHasNextPage(results.users.length + results.skip < results.total);
           }
         } catch (err) {
           setIsError(true);
