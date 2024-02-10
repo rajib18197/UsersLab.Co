@@ -6,6 +6,7 @@ const Select = forwardRef(function Select(
 ) {
   return (
     <select value={value} ref={ref} onChange={onSelect} {...props}>
+      <option value="">Select a Value</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

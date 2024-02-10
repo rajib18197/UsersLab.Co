@@ -63,7 +63,7 @@ function Window({ windowName, height, children }) {
     <div className="fixed inset-0 w-full h-full z-20">
       <div
         ref={ref}
-        className={`fixed top-0 right-0 h-[100%] w-[80%] px-8 py-10 bg-gray-50 z-30 shadow-2xl`}
+        className={`fixed top-0 right-0 h-[100%] w-[80%] px-8 py-10 bg-gray-50 z-30 shadow-2xl  overflow-y-scroll scrollbar`}
       >
         <button
           onClick={close}

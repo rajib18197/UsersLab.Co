@@ -3,9 +3,15 @@ import Select from "./Select";
 
 export default function SortBy({ options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const sortValue = searchParams.get("sortBy") || options.at(0).value;
+  const sortValue = searchParams.get("sortBy") || "";
 
   function handleChange(e) {
+    if (e.target.value === "") {
+      searchParams.delete("sortBy");
+      setSearchParams(searchParams);
+      return;
+    }
+
     searchParams.set("sortBy", e.target.value);
     setSearchParams(searchParams);
   }

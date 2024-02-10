@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: rgb(100, 28, 62);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(122, 83, 240);
+    border-radius: 100vh;
+    /* border: 3px solid #ddf318; */
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #fcf8fb;
+  }
+
+  .input {
+    @apply rounded-full border border-stone-200 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3;
+  }
+}
