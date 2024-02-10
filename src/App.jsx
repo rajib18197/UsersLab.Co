@@ -9,8 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          {/* <Route index element={<Navigate to="users" replace />} /> */}
-          <Route index element={<Users />} />
+          <Route index element={<Navigate to="users" replace />} />
           <Route path="/users" element={<Users />} />
           <Route path="/users/:id" element={<User />} />
           <Route path="*" element={<PageNotFound />} />
