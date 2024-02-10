@@ -6,11 +6,14 @@ import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import AddNewUser from "../features/users/AddNewUser";
 import { addUser } from "../services/apiUsers";
+import { useDebounce } from "../hooks/useDebounce";
 
 export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [newUserData, setNewUserData] = useState(null);
+
+  const { doSearch } = useDebounce(handleSearchTermChange, 1000);
 
   async function handleNewUserClick(newUser) {
     const results = await addUser(newUser);
@@ -18,9 +21,11 @@ export default function Users() {
     setNewUserData(results);
   }
 
-  function handleSearchTermChange(e) {
-    setSearchTerm(e.target.value);
+  function handleSearchTermChange(value) {
+    setSearchTerm(value);
     setCurrentPage(1);
+
+    console.log(value);
   }
 
   return (
@@ -45,10 +50,7 @@ export default function Users() {
         </Modal>
 
         <UsersListOperations>
-          <SearchUsers
-            searchTerm={searchTerm}
-            onSearchTermChange={handleSearchTermChange}
-          />
+          <SearchUsers searchTerm={searchTerm} onSearchTermChange={doSearch} />
         </UsersListOperations>
       </div>
       <UsersList
