@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export function useUsersData({ searchTerm, page, service, id, newUserData }) {
   const [data, setData] = useState(id ? {} : []);
@@ -9,9 +9,9 @@ export function useUsersData({ searchTerm, page, service, id, newUserData }) {
 
   const ref = useRef();
 
-  if (service) {
+  useLayoutEffect(() => {
     ref.current = service;
-  }
+  }, [service]);
 
   useEffect(
     function () {

@@ -1,12 +1,12 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 
 export function useInfiniteScroll({ hasNextPage, callback }) {
   let intObserver = useRef();
   const ref = useRef();
 
-  if (callback) {
+  useLayoutEffect(() => {
     ref.current = callback;
-  }
+  }, [callback]);
 
   const refCallback = useCallback(
     function (node) {
