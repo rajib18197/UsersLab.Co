@@ -11,8 +11,8 @@ function App() {
         <Route element={<AppLayout />}>
           {/* <Route index element={<Navigate to="users" replace />} /> */}
           <Route index element={<Users />} />
-          <Route path="users" element={<Users />} />
-          <Route path="users/:id" element={<User />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<User />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
