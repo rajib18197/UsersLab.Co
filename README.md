@@ -12,8 +12,7 @@
 - display details of an individual user
 - create new users
 - Search functionality with debounce technique to control the frequency of an api call
-- Can toggle a task whether it is done or not
-- have Data Operation like sorting so that users are able to refine the tasks list with ease
+- have Data Operation like sorting so that users are able to refine the users list with ease
 - Custom form Validation to make the user experience much better
 - leverage a design pattern: Compound Component for reusable and flexible component and also used render props pattern
 - Used Composition pattern for building better layouts

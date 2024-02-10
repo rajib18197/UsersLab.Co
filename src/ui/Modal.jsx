@@ -39,6 +39,8 @@ function Window({ windowName, height, children }) {
   const { openName, close } = useContext(ModalContext);
   const ref = useRef();
 
+  // Basically here we listen the click event in the capturing phase because when a user clicked modal button to open the modal, but that modal window shows for a couple of milliseconds and after that the window disappears strangely. That's because when we clicked a button to open the modal in the above [Open] component that clicked also open the modal window for just a milliseconds and then closes it immediately.  Since events bubbles in JavaScript (meaning parent element can recieve and handle event that occurs in the child elements as a target if both of those DOM elements listens the exact same event) and clicking the open modal button open the modal window for a ms and that click event also attached to the document therefore, that listeners detects that window is open and the closes the window immediately. there is multiple ways to solve it for example stops the event propagation or listen for the event in the capturing phase. In this case I listen for the event in the capturing phase to solve this issue.
+
   useEffect(
     function () {
       function handleClose(e) {
@@ -56,8 +58,6 @@ function Window({ windowName, height, children }) {
   );
 
   if (openName !== windowName) return null;
-
-  const calcHeight = height ? height : "95%";
 
   return createPortal(
     <div className="fixed inset-0 w-full h-full z-20">

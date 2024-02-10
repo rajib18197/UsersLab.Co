@@ -31,8 +31,6 @@ export default function UsersList({
     newUserData: newUserData,
   });
 
-  console.log(hasNextPage);
-
   // For Infinite Scroll
   const { refCallback } = useInfiniteScroll({
     hasNextPage,
@@ -47,15 +45,14 @@ export default function UsersList({
 
   if (sortBy) {
     const [field, direction] = sortBy.split("-") || [];
-    console.log(field);
+
     const modifier = direction === "asc" ? 1 : -1;
 
     sortedUsers = sort(users, field, modifier);
-    console.log(sortedUsers);
   }
 
   return (
-    <div className="grid grid-cols-1 place-items-center gap-16 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 place-items-center gap-8 xl:gap-16 md:grid-cols-2 lg:grid-cols-3">
       {sortedUsers?.map((user, i) =>
         sortedUsers?.length === i + 1 ? (
           <UserCard

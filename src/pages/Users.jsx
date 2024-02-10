@@ -25,15 +25,12 @@ export default function Users() {
 
   async function handleNewUserClick(newUser) {
     const results = await addUser(newUser);
-    console.log(results);
     setNewUserData((users) => [...users, results]);
   }
 
   function handleSearchTermChange(value) {
     setSearchTerm(value);
     setCurrentPage(1);
-
-    console.log(value);
   }
 
   return (
