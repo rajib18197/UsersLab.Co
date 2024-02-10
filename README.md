@@ -20,10 +20,10 @@
 
 ## **My approaches**
 
-- Divide the application into multiple of feature categories, In this app, there's only 1 feature category users.
+- Divide the application into multiple of feature categories, In this app, there's only 1 feature category: users.
 - Next up I drill down users feature category, figured out all the features it need
 - Take one feature at a time, break up that UI feature into components to separate responsibilities, think about state Management (which type: local/global) and data flow to power up the feature
 - striving for reusable component whenever need arises
 - Fully Responsive Design
 
-Project Link:
+Project Link: users-lab-co.vercel.app
