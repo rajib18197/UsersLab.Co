@@ -2,7 +2,7 @@ import SortBy from "../../ui/SortBy";
 
 export default function UsersListOperations({ children }) {
   return (
-    <div className="flex gap-6 items-center">
+    <div className="flex flex-col sm:flex-row gap-6 items-center">
       {children}
 
       <SortBy

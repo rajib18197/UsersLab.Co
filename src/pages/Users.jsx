@@ -38,7 +38,7 @@ export default function Users() {
 
   return (
     <div className="flex flex-col gap-16 p-8">
-      <div className="flex gap-2 justify-between">
+      <div className="flex flex-col gap-6 justify-center items-center md:flex-row md:gap-2 md:justify-between">
         <Modal>
           <Modal.Open opens="add-new-user">
             {(handler) => (

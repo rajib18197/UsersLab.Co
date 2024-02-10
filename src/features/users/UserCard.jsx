@@ -25,7 +25,7 @@ export default forwardRef(function UserCard({ user }, ref) {
 
   return (
     <div
-      className="bg-[hsl(0deg, 0%, 100%)] shaodow-cs text-stone-800 p-8 pb-16 w-[365px] rounded flex flex-col gap-6"
+      className="bg-[hsl(0deg, 0%, 100%)] shaodow-cs text-stone-800 p-8 pb-16 max-w-[365px] rounded flex flex-col gap-6"
       ref={ref}
     >
       <div className="bg-slate-800 p-2 flex items-center justify-center w-max">

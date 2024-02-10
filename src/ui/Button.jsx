@@ -4,7 +4,7 @@ export default function Button({ children, to, type, disabled, onClick }) {
   const navigate = useNavigate();
 
   const base =
-    "inline-block text-sm rounded-full bg-pink-500 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-300 hover:bg-pink-400 focus:bg-pink-400 focus:outline-none focus:ring focus:ring-pink-400 focus:ring-offset-2 disabled:cursor-not-allowed";
+    "w-max inline-block text-sm rounded-full bg-pink-500 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-300 hover:bg-pink-400 focus:bg-pink-400 focus:outline-none focus:ring focus:ring-pink-400 focus:ring-offset-2 disabled:cursor-not-allowed";
 
   const styles = {
     primary: base + " px-4 py-3 md:px-6 md:py-3.5",

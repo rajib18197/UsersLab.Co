@@ -1,7 +1,7 @@
 export default function Heading({ as, children }) {
   const headingType = {
     h1: "uppercase text-xl",
-    h2: "uppercase text-xl",
+    h2: "text-[16px] uppercase sm:text-xl",
     h3: "uppercase text-xl",
   };
   const Type = as;

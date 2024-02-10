@@ -7,8 +7,9 @@ export function useUsersData({ searchTerm, page, service, id, newUserData }) {
   const [error, setError] = useState(null);
   const [hasNextPage, setHasNextPage] = useState(false);
 
-  const ref = useRef();
+  const ref = useRef(service);
 
+  // We do this because otherwise we have to memoize the [service function] in the component where this hook has been called as we have to include the [service function] in the dependency array of useEffect.
   useLayoutEffect(() => {
     ref.current = service;
   }, [service]);

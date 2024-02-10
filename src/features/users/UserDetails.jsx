@@ -37,7 +37,7 @@ export default function UserDetails() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <div className="bg-purple-600 text-stone-50 px-6 py-1 rounded flex justify-between items-center">
+        <div className="bg-purple-600 text-stone-50 px-6 py-1 rounded flex flex-wrap justify-center md:justify-between items-center">
           <div className="flex gap-4 items-center p-2">
             <div className="w-[70px] h-[70px] rounded-full bg-stone-800 flex items-center justify-center">
               <img
@@ -55,11 +55,11 @@ export default function UserDetails() {
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <p className="text-xl">{address}</p>
-          <p className="text-2xl">&bull;</p>
+          <p className="hidden sm:text-2xl sm:block">&bull;</p>
           <p className="text-xl">{city} City</p>
-          <p className="text-2xl">&bull;</p>
+          <p className="hidden sm:text-2xl sm:block">&bull;</p>
           <p className="text-xl">{companyName}</p>
         </div>
       </div>
